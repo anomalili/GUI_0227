@@ -308,4 +308,27 @@ public class Dolgozok extends javax.swing.JFrame {
             fiukCombo.addItem(fiuk[i]);
         }
     }
+    private void FajlbaKiir() throws IOException {
+    String fajlNeve = "emberek.txt";
+    Path path = Paths.get(fajlNeve);
+    if (Files.exists(path)){
+    Files.delete(path);}
+    String nem = null;
+    
+        if (fiuRadio.isSelected()) {
+            nem += "Fiúk:";
+        }
+        if (lanyRadio.isSelected()) {
+            nem += "Lányok:";}
+    
+    String szoveg =
+            
+            legidosebb.getText().toString();
+            osszesKor.getText().toString();
+            hatEveDolgozo.getText().toString();
+            
+    Files.write(path, szoveg.getBytes());
+        
+    }
+    
 }
