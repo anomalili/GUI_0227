@@ -4,6 +4,9 @@
  */
 package controller;
 
+import java.io.IOException;
+import view.Dolgozok;
+
 /**
  *
  * @author makra.zs.lili
@@ -13,7 +16,7 @@ public class Program {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         new Dolgozok().main();
     }
     
