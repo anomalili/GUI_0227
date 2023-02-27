@@ -282,4 +282,18 @@ public class Dolgozok extends javax.swing.JFrame {
         sc.useDelimiter(";Z");
         System.out.println(sc.next());
     }
+        private void RadioGombValaszt() {
+        if (fiuRadio.isSelected()) {
+            legidosebb.setText("35");
+            osszesKor.setText("100");
+            hatEveDolgozo.setText("Róbert");
+        }
+        if (lanyRadio.isSelected()) {
+
+            legidosebb.setText("33");
+            osszesKor.setText("77");
+            hatEveDolgozo.setText("nincs");
+        }
+
+    }
 }
