@@ -296,4 +296,16 @@ public class Dolgozok extends javax.swing.JFrame {
         }
 
     }
+    
+        private void ComboFeltolt() {
+        String[] lanyok = {"Petra", "Éva", "Xénia"};
+        String[] fiuk = {"Péter", "Pál", "Róbert", "Géza"};
+
+        for (int i = 0; i < lanyok.length; i++) {
+            lanyokCombo.addItem(lanyok[i]);
+        }
+        for (int i = 0; i < fiuk.length; i++) {
+            fiukCombo.addItem(fiuk[i]);
+        }
+    }
 }
