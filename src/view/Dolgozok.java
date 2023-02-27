@@ -3,8 +3,13 @@ package view;
 import java.awt.PopupMenu;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -61,6 +66,12 @@ public class Dolgozok extends javax.swing.JFrame {
         lanyokLabel.setText("Lányok");
 
         fiukLabel.setText("Fiúk");
+
+        lanyokCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lanyokComboActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setToolTipText("Összesítő");
@@ -179,6 +190,11 @@ public class Dolgozok extends javax.swing.JFrame {
         mind2nemCheckB.setText("Mindkettő nem");
 
         mentGomb.setText("Ment");
+        mentGomb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mentGombActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,15 +245,27 @@ public class Dolgozok extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
+    private void mentGombActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        try {
+            FajlbaKiir();
+        } catch (IOException ex) {
+            Logger.getLogger(Dolgozok.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }                                        
+
+    private void lanyokComboActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+
+    }                                           
+
     /**
      * @param args the command line arguments
      */
-    public void main() throws FileNotFoundException {
+    public void main() throws FileNotFoundException, IOException {
 
         FajlBeolvas();
-        ComboFeltolt();
         RadioGombValaszt();
-        FajlbaKiir();
+        Adatok();
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -272,17 +300,26 @@ public class Dolgozok extends javax.swing.JFrame {
     private javax.swing.JLabel osszesitoLabel;
     // End of variables declaration                   
 
-
-
-
-
     private void FajlBeolvas() throws FileNotFoundException {
         File fajl = new File("src\\model\\emberek.txt");
         Scanner sc = new Scanner(fajl);
         sc.useDelimiter(";Z");
         System.out.println(sc.next());
     }
-        private void RadioGombValaszt() {
+
+    private void ComboFeltolt() {
+        String[] lanyok = {"Petra", "Éva", "Xénia"};
+        String[] fiuk = {"Péter", "Pál", "Róbert", "Géza"};
+
+        for (int i = 0; i < lanyok.length; i++) {
+            lanyokCombo.addItem(lanyok[i]);
+        }
+        for (int i = 0; i < fiuk.length; i++) {
+            fiukCombo.addItem(fiuk[i]);
+        }
+    }
+
+    private void RadioGombValaszt() {
         if (fiuRadio.isSelected()) {
             legidosebb.setText("35");
             osszesKor.setText("100");
@@ -296,39 +333,35 @@ public class Dolgozok extends javax.swing.JFrame {
         }
 
     }
-    
-        private void ComboFeltolt() {
-        String[] lanyok = {"Petra", "Éva", "Xénia"};
-        String[] fiuk = {"Péter", "Pál", "Róbert", "Géza"};
 
-        for (int i = 0; i < lanyok.length; i++) {
-            lanyokCombo.addItem(lanyok[i]);
-        }
-        for (int i = 0; i < fiuk.length; i++) {
-            fiukCombo.addItem(fiuk[i]);
-        }
-    }
     private void FajlbaKiir() throws IOException {
-    String fajlNeve = "emberek.txt";
-    Path path = Paths.get(fajlNeve);
-    if (Files.exists(path)){
-    Files.delete(path);}
-    String nem = null;
-    
+        String fajlNeve = "emberek.txt";
+        Path path = Paths.get(fajlNeve);
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
+        String nem = null;
+
         if (fiuRadio.isSelected()) {
             nem += "Fiúk:";
         }
         if (lanyRadio.isSelected()) {
-            nem += "Lányok:";}
-    
-    String szoveg =
-            
-            legidosebb.getText().toString();
-            osszesKor.getText().toString();
-            hatEveDolgozo.getText().toString();
-            
-    Files.write(path, szoveg.getBytes());
-        
+            nem += "Lányok:";
+        }
+
+        String szoveg = 
+        legidosebb.getText().toString();
+        osszesKor.getText().toString();
+        hatEveDolgozo.getText().toString();
+
+        Files.write(path, szoveg.getBytes());
+
+    }
+
+    private void Adatok() {
+    fiukCombo.getSelectedItem();
+        kor.setText("");
+        miotaDolg.setText("");
     }
     
 }
